@@ -1,0 +1,57 @@
+脚手架是无配置的，就是说看不见webpack相关的东西，但是他的打包工具就是webpack，是被封装到了react-scripts这个库中
+
+
+redux中最核心的对象就是store对象， 由createStore这个工厂创建，store对象的作用是管理对象，他的内部维护state和reducer(用来更新store中的对象)
+
+核心的方法有：
+  getState() // 获得state
+
+  dispatch(action) // 触发dispatch是为了更新状态，而更新状态是由reducer来更新的，因此该方法是由reducer调用的
+
+  subscribe(listener) // 像消息订阅中的发布消息，回调函数用来更新组件重新渲染组件，这个方法有什么用了，我们知道dispatch会产生一个新的状态，状态变了需要重新渲染组件
+
+
+  action标识要执行行为的对象，包含两个属性
+    type: 行为属性
+
+    data: 数据属性
+
+    const action = {
+      type: 'INCREAMENT',
+      data: 2
+    }
+
+    Action Creator,创建action的工厂函数，如：
+
+    const increament = (number) => ({type: 'INCTEAMENT', data:number})
+
+
+  reducer 是一个纯函数，根据老的state和action,产生新的state, 例如：
+
+  export default function counter(state=0, action) {
+    switch(action.type){
+      case 'INCREAMENT':
+        return state + action.data
+      case 'DCREAMENT':
+        return state - action.data
+      default
+        reuturn state
+    }
+  }
+
+  注意： 返回的是新的状态，不修改老的状态
+
+  store 对象，是将state,action, reducer联系到一起的管理对象
+
+  1.如何得到store对象：
+      import {createStore} from 'redux'
+      import reducer from './reducer'
+
+      const store = createStore(reducer) // reducer会在store内部管理，其实store最终管理的是state,但是没有reducer就不会产生新的state,
+
+  2. 此对象的功能
+      getSteate() // 得到state
+
+      dispatch(action) // 分发action,触发reducer调用，产生新的state
+
+      subscribe(listener) // 注册监听，产生新的state时自动触发调用
