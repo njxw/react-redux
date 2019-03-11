@@ -55,3 +55,12 @@ redux中最核心的对象就是store对象， 由createStore这个工厂创建�
       dispatch(action) // 分发action,触发reducer调用，产生新的state
 
       subscribe(listener) // 注册监听，产生新的state时自动触发调用
+
+
+
+react-redux 是一个react插件，用来简化react中使用redux
+
+1. 需要下载安装才能使用 npm install --save react-redux
+
+它里面有一个组件Provider, 通过import {Provider} from 'react-redux' 引入
+通过Provider可以帮我们进行订阅监听，
