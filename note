@@ -64,3 +64,39 @@ react-redux 是一个react插件，用来简化react中使用redux
 
 它里面有一个组件Provider, 通过import {Provider} from 'react-redux' 引入
 通过Provider可以帮我们进行订阅监听，
+
+
+react-redux 将所有组件分为两大类,一种是ui组件,一种是容器组件,
+ui组件:
+  负责ui的呈递,不带有任何业务逻辑
+  通过props接受数据(一般数据和函数数据)
+  不适用任何redux的API
+  一般保存在components文件夹下
+容器组件:
+  只负责数据和业务逻辑,不负责ui的呈现
+  使用redux的api
+  一般保存在container文件夹下
+
+
+  redux的问题？react支持异步更新，但是我们用了redux,发请求的应该是redux来做的事，但是他不支持异步
+
+  redux不支持异步，要让redux支持异步就要用到一个中间件，redux-thunk（是redux的插件，不是react的插件，该插件是专门让redux来写异步代码） , 首先需要安装
+
+  使用：
+  import {createStore,applyMiddleware} from 'redux'
+
+  import thunk from 'redux-thunk'
+
+  const store = createStore(counter, applyMiddleware(thunk)) // 应用上异步中间件，第二个参数表示应用那些中间件
+
+
+  redux浏览器插件， 安装之后还需要做一些其他的事，就是下载工具依赖包
+  npm install --save-dev redux-devtools-extension
+
+  安装完后还需要在项目中引入：在store引入
+  import {composeWithDevTools} from 'redux-devtools-extension'
+  import thunk from 'redux-thunk'
+  const store = createStore(
+    counter, // reducer
+    composeWithDevTools(applyMiddleware(thunk))
+  )

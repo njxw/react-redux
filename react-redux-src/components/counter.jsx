@@ -47,14 +47,11 @@ import PropTypes from 'prop-types'
     // 1.得到新的值
     const num = this.select.value*1
 
-    // 这里的异步代码不应该在这里，异步这个事情应该放在redux中，
-    // setTimeout (() => {
-    //   // this.props.store.dispatch({type:INCREAMENT, data: num})
-    //   // this.props.store.dispatch(actions.increament(num))
-    //   this.props.increament(num)
-    // }, 300)
-
-    this.props.increamentAsync(num) // increamentAsync应该来自容器组件
+    setTimeout (() => {
+      // this.props.store.dispatch({type:INCREAMENT, data: num})
+      // this.props.store.dispatch(actions.increament(num))
+      this.props.increament(num)
+    }, 300)
   }
   render () {
     // const count =this.props.store.getState() // 会得到所有的state
